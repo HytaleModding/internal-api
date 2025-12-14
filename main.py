@@ -22,6 +22,10 @@ def verify_api_key(authorization: str = Header()):
         raise HTTPException(status_code=401, detail="Invalid API key")
     return token
 
+@app.get('/')
+async def root():
+    return {"message": "200 OK"}
+
 @app.get("/guild/stats")
 async def get_guild_stats(api_key: str = Depends(verify_api_key)):
     try:
